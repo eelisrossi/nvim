@@ -41,22 +41,28 @@ packer.init {
 -- Install your plugins here
 return packer.startup(function(use)
     -- My plugins here
-    use "wbthomason/packer.nvim"        -- Have packer manage itself
-    use "nvim-lua/popup.nvim"           -- An implementation of the Popup API from vim in Neovim
-    use "nvim-lua/plenary.nvim"         -- Useful lua functions used by lots of plugins
+    use "wbthomason/packer.nvim"            -- Have packer manage itself
+    use "nvim-lua/popup.nvim"               -- An implementation of the Popup API from vim in Neovim
+    use "nvim-lua/plenary.nvim"             -- Useful lua functions used by lots of plugins
 
-    use "hrsh7th/nvim-cmp"              -- The completion plugin
-    use "hrsh7th/cmp-buffer"            -- buffer completions 
-    use "hrsh7th/cmp-path"              -- path completions
-    use "hrsh7th/cmp-cmdline"           -- cmdline completions 
-    use "saadparwaiz1/cmp_luasnip"      -- snippet completions
+    use "hrsh7th/nvim-cmp"                  -- The completion plugin
+    use "hrsh7th/cmp-buffer"                -- buffer completions
+    use "hrsh7th/cmp-path"                  -- path completions
+    use "hrsh7th/cmp-cmdline"               -- cmdline completions
+    use "saadparwaiz1/cmp_luasnip"          -- snippet completions
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lua"
 
     -- snippets
-    use "L3MON4D3/LuaSnip"              -- snippet engine
-    use "rafamadriz/friendly-snippets"  -- a bunch of snippets to use
+    use "L3MON4D3/LuaSnip"                  -- snippet engine
+    use "rafamadriz/friendly-snippets"      -- a bunch of snippets to use
+
+    -- LSP
+    use "neovim/nvim-lspconfig"             -- enable LSP
+    use "williamboman/nvim-lsp-installer"   -- simple to use language service installer
 
     use "drewtempelmeyer/palenight.vim"
-    
+
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
