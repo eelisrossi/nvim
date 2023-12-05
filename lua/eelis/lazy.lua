@@ -14,40 +14,123 @@ vim.opt.rtp:prepend(lazypath)
 
 -- all plugins
 local plugin_specs = {
+
   -- ui/theme-related stuff
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim",        name = "catppuccin", priority = 1000 },
 
-  -- lsp-related things
-  { "j-hui/fidget.nvim" },
-  
-  -- git related things
-  { "lewis6991/gitsigns.nvim" },
+  -- autocompletion & lsp
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      -- Snippet Engine & its associated nvim-cmp source
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
 
+      -- Adds LSP completion capabilities
+      'hrsh7th/cmp-nvim-lsp',
 
-  -- utility stuff
-
-  { 
-    "nvim-telescope/telescope.nvim", tag = '0.1.0',
-    requires = { {'nvim-lua/plenary.nvim'} }
+      -- Adds a number of user-friendly snippets
+      'rafamadriz/friendly-snippets',
+    },
+    config = function()
+      require("eelis.config.nvim-cmp")
+    end,
   },
 
-  { "nvim-lua/plenary.nvim" },
+  {
+    'williamboman/mason.nvim',
+    config = function()
+      require("eelis.config.mason")
+    end,
+  },
 
-  { 
-    "theprimeagen/harpoon", 
-    branch = "harpoon2", 
-    requires = { {"nvim-lua/plenary.nvim"} },
-  }, 
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufRead", "BufNewFile" },
+    dependencies = {
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      { "j-hui/fidget.nvim", opts = {} },
+
+      'folke/neodev.nvim',
+    },
+    config = function()
+      require("eelis.config.lsp")
+    end,
+  },
 
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
+    event = "VeryLazy",
     build = ':TSUpdate',
+    config = function()
+      require("eelis.config.treesitter")
+    end,
   },
-  
-  { 'folke/which-key.nvim', opts = {} },
+
+  -- git related things
+  { "lewis6991/gitsigns.nvim" },
+  { 'tpope/vim-fugitive' },
+  { 'tpope/vim-rhubarb' },
+
+
+  -- utility stuff
+
+  {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+      -- Only load if `make` is available. Make sure you have the system
+      -- requirements installed.
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        -- NOTE: If you are having trouble with this installation,
+        --       refer to the README for telescope-fzf-native for more instructions.
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
+    },
+  },
+
+  {
+    "theprimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("eelis.config.copilot")
+    end,
+  },
+
+  { 'folke/which-key.nvim',  opts = {} },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("eelis.config.statusline")
+    end,
+  },
+
+  { 'numToStr/Comment.nvim', opts = {} },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {}
+  },
 
 }
 

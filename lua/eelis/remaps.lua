@@ -2,7 +2,7 @@ local map = vim.keymap.set
 
 map({ "i", "x" }, "jf", "<Esc>l")
 
-map("n", "<leader>e" ,":Ex<CR>")
+map("n", "<leader>e", ":Ex<CR>")
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -37,4 +37,8 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
-map("n", "<leader>f", vim.lsp.buf.format)
+-- map("n", "<leader>f", vim.lsp.buf.format)
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '<leader>oe', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>oq', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })

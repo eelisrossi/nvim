@@ -37,7 +37,6 @@ require("catppuccin").setup({
         fidget = true,
         harpoon = true,
         mason = true,
-
     },
 })
 
