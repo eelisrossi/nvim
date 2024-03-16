@@ -1,0 +1,4 @@
+.vim/
+lazy-lock.json
+.cache/
+.lesshst
