@@ -28,7 +28,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "tsserver",
+                "powershell_es"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -46,6 +46,18 @@ return {
                             Lua = {
                                 diagnostics = {
                                     globals = { "vim", "it", "describe", "before_each", "after_each" },
+                                }
+                            }
+                        }
+                    }
+                end,
+                ["powershell_es"] = function()
+                    local lspconfig = require('lspconfig')
+                    lspconfig.powershell_es.setup {
+                        settings = {
+                            powershell = {
+                                codeFormatting = {
+                                    Preset = 'OTBS'
                                 }
                             }
                         }
