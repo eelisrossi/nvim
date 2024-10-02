@@ -53,15 +53,6 @@ return {
 
   -- utility stuff
 
-  {
-    'zbirenbaum/copilot.lua',
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("eelis.config.copilot")
-    end,
-  },
-
   { 'folke/which-key.nvim',  opts = {} },
 
   {
