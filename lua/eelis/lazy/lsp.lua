@@ -14,6 +14,7 @@ return {
     },
 
     config = function()
+        local util = require "lspconfig/util"
         local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -58,6 +59,24 @@ return {
                             powershell = {
                                 codeFormatting = {
                                     Preset = 'OTBS'
+                                }
+                            }
+                        }
+                    }
+                end,
+                ["gopls"] = function()
+                    local lspconfig = require('lspconfig')
+                    lspconfig.gopls.setup {
+                        capabilities = capabilities,
+                        cmd = { "gopls" },
+                        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+                        root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+                        settings = {
+                            gopls = {
+                                completeUnimported = true,
+                                usePlaceholders = true,
+                                analyses = {
+                                    unusedparams = true,
                                 }
                             }
                         }
