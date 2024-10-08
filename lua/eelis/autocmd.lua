@@ -10,17 +10,17 @@ vim.g.netrw_keepdir = 0
 vim.g.netrw_banner = 0
 
 autocmd('filetype', {
-  group = hdzgroup,
-  pattern = 'netrw',
-  desc = 'Better mappings for netrw',
-  callback = function()
-    local bind = function(lhs, rhs)
-      vim.keymap.set('n', lhs, rhs, { remap = true, buffer = true })
-    end
+    group = hdzgroup,
+    pattern = 'netrw',
+    desc = 'Better mappings for netrw',
+    callback = function()
+        local bind = function(lhs, rhs)
+            vim.keymap.set('n', lhs, rhs, { remap = true, buffer = true })
+        end
 
-    bind('h', '-^')
-    bind('l', '<CR>')
-  end
+        bind('h', '-^')
+        bind('l', '<CR>')
+    end
 })
 
 autocmd('TextYankPost', {
@@ -34,7 +34,7 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
     group = hdzgroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],

@@ -1,6 +1,5 @@
 return {
 
-
     -- git related things
     { "lewis6991/gitsigns.nvim" },
     { 'tpope/vim-fugitive' },
@@ -11,15 +10,7 @@ return {
 
     { 'folke/which-key.nvim',   opts = {} },
 
-    {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("eelis.config.statusline")
-        end,
-    },
-
-    { 'numToStr/Comment.nvim', opts = {} },
+    { 'numToStr/Comment.nvim',  opts = {} },
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
@@ -34,6 +25,5 @@ return {
                 comments_only = false,
             }
         }
-    }
-
+    },
 }

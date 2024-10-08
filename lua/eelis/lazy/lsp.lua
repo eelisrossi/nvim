@@ -28,11 +28,11 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "powershell_es"
+                "powershell_es",
+                "gopls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
@@ -69,6 +69,18 @@ return {
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
+            window = {
+                completion = {
+                    border = "solid",
+                    style = "minimal",
+                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+                    winblend = 0,
+                },
+                documentation = {
+                    border = "single",
+                    winblend = 0,
+                }
+            },
             snippet = {
                 expand = function(args)
                     require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -93,7 +105,7 @@ return {
             float = {
                 focusable = false,
                 style = "minimal",
-                border = "rounded",
+                border = "single",
                 source = "always",
                 header = "",
                 prefix = "",
