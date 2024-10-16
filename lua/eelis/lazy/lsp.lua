@@ -96,7 +96,7 @@ return {
                     winblend = 0,
                 },
                 documentation = {
-                    border = "single",
+                    border = "solid",
                     winblend = 0,
                 }
             },
@@ -124,7 +124,7 @@ return {
             float = {
                 focusable = false,
                 style = "minimal",
-                border = "single",
+                border = "solid",
                 source = "always",
                 header = "",
                 prefix = "",
