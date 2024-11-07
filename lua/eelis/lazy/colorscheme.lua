@@ -9,7 +9,7 @@ return {
                 background = { dark = "macchiato" },
                 transparent_background = true,
                 show_end_of_buffer = false,  -- shows the '~' characters after the end of buffers
-                term_colors = true,         -- sets terminal colors (e.g. `g:terminal_color_0`)
+                term_colors = true,          -- sets terminal colors (e.g. `g:terminal_color_0`)
                 dim_inactive = {
                     enabled = false,         -- dims the background color of inactive window
                     shade = "dark",
@@ -62,8 +62,43 @@ return {
                 },
 
             })
-            vim.cmd("colorscheme catppuccin")
+            -- vim.cmd("colorscheme catppuccin")
             -- vim.api.nvim_win_set_option(0, "winblend", 0)
+        end
+    },
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        config = function()
+            require('rose-pine').setup({
+                disable_background = true,
+                styles = {
+                    italic = false,
+                },
+            })
+            vim.cmd("colorscheme rose-pine")
+        end
+    },
+    {
+        "folke/tokyonight.nvim",
+        config = function()
+            require("tokyonight").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                style = "storm",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+                transparent = true,     -- Enable this to disable setting the background color
+                terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+                styles = {
+                    -- Style to be applied to different syntax groups
+                    -- Value is any valid attr-list value for `:help nvim_set_hl`
+                    comments = { italic = false },
+                    keywords = { italic = false },
+                    -- Background styles. Can be "dark", "transparent" or "normal"
+                    sidebars = "dark", -- style for sidebars, see below
+                    floats = "dark",   -- style for floating windows
+                },
+            })
+            -- vim.cmd("colorscheme tokyonight")
         end
     },
 }

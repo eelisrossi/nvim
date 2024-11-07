@@ -88,18 +88,18 @@ return {
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
-            window = {
-                completion = {
-                    border = "solid",
-                    style = "minimal",
-                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-                    winblend = 0,
-                },
-                documentation = {
-                    border = "solid",
-                    winblend = 0,
-                }
-            },
+            -- window = {
+            --     completion = {
+            --         border = "solid",
+            --         style = "minimal",
+            --         winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            --         winblend = 0,
+            --     },
+            --     documentation = {
+            --         border = "solid",
+            --         winblend = 0,
+            --     }
+            -- },
             snippet = {
                 expand = function(args)
                     require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -124,7 +124,8 @@ return {
             float = {
                 focusable = false,
                 style = "minimal",
-                border = "solid",
+                -- border = "solid",
+                border = "rounded",
                 source = "always",
                 header = "",
                 prefix = "",

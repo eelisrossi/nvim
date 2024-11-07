@@ -23,7 +23,6 @@ opt.hlsearch = false
 opt.incsearch = true
 
 opt.termguicolors = true       -- True color support
-
 opt.autowrite = true           -- Enable auto write
 opt.clipboard = "unnamedplus"  -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
@@ -69,3 +68,6 @@ end
 vim.g.markdown_recommended_style = 0
 
 opt.colorcolumn = "80"
+
+-- Enable :find to look through the whole project
+vim.cmd("set path+=**")
