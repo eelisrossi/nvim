@@ -74,6 +74,7 @@ return {
                 disable_background = true,
                 styles = {
                     italic = false,
+                    transparency = true,
                 },
             })
             vim.cmd("colorscheme rose-pine")
