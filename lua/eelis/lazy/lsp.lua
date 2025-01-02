@@ -71,6 +71,12 @@ return {
                         }
                     }
                 end,
+                ["htmx"] = function()
+                    local lspconfig = require('lspconfig')
+                    lspconfig.htmx.setup {
+                        filetypes = { "html" }
+                    }
+                end
             }
         })
 
@@ -88,4 +94,3 @@ return {
         })
     end
 }
-
