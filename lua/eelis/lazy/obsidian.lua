@@ -41,24 +41,47 @@ return {
             }
         },
 
-        -- Optional, customize how wiki links are formatted. You can set this to one of:
-        --  * "use_alias_only", e.g. '[[Foo Bar]]'
-        --  * "prepend_note_id", e.g. '[[foo-bar|Foo Bar]]'
-        --  * "prepend_note_path", e.g. '[[foo-bar.md|Foo Bar]]'
-        --  * "use_path_only", e.g. '[[foo-bar.md]]'
-        -- Or you can set it to a function that takes a table of options and returns a string, like this:
+
+        new_notes_location = "current_dir",
+
+        -- Optional, customize how note file names are generated given the ID, target directory, and title.
+        ---@param spec { id: string, dir: obsidian.Path, title: string|? }
+        ---@return string|obsidian.Path The full path to the new note.
+        note_path_func = function(spec)
+            -- This is equivalent to the default behavior.
+            local path = tostring(spec.id)
+            return path:with_suffix(".md")
+        end,
+
         wiki_link_func = "prepend_note_id",
 
         markdown_link_func = function(opts)
             return require("obsidian.util").markdown_link(opts)
         end,
 
-        -- Either 'wiki' or 'markdown'.
         preferred_link_style = "wiki",
-
-        -- Optional, boolean or a function that takes a filename and returns a boolean.
-        -- `true` indicates that you don't want obsidian.nvim to manage frontmatter.
         disable_frontmatter = false,
+
+        -- Optional, alternatively you can customize the frontmatter data.
+        ---@return table
+        note_frontmatter_func = function(note)
+            -- Add the title of the note as an alias.
+            if note.title then
+                note:add_alias(note.title)
+            end
+
+            local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+
+            -- `note.metadata` contains any manually added fields in the frontmatter.
+            -- So here we just make sure those fields are kept in the frontmatter.
+            if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+                for k, v in pairs(note.metadata) do
+                    out[k] = v
+                end
+            end
+
+            return out
+        end,
 
         picker = {
             -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.

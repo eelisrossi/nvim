@@ -40,4 +40,6 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+map("n", "<leader>pd", ":ObsidianDailies<cr>", { desc = "Show Daily Notes"})
+
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format file "})
