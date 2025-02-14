@@ -4,9 +4,8 @@ require('eelis.remaps')
 require('eelis.autocmd')
 
 local uname = vim.loop.os_uname()
-print(uname.sysname)
 
-if uname.sysname == 'Windows' then
+if uname.sysname == 'Windows_NT' then
     vim.cmd([[
 		let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
 		let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
