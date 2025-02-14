@@ -7,7 +7,7 @@ return {
         require('lualine').setup {
             options = {
                 icons_enabled = true,
-                theme = 'catppuccin',
+                theme = 'rose-pine',
                 component_separators = { left = '', right = '' },
                 section_separators = { left = '', right = '' },
                 disabled_filetypes = {
@@ -45,16 +45,4 @@ return {
             extensions = {}
         }
     end,
-    {
-        "nvim-lualine/lualine.nvim",
-        event = "ColorScheme",
-        config = function()
-            require("lualine").setup({
-                options = {
-                    --- @usage 'rose-pine' | 'rose-pine-alt'
-                    theme = "rose-pine"
-                }
-            })
-        end
-    }
 }
