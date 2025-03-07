@@ -4,7 +4,6 @@ require('eelis.remaps')
 require('eelis.autocmd')
 
 local uname = vim.loop.os_uname()
-print(uname.sysname)
 
 if uname.sysname == 'Windows' then
     vim.cmd([[

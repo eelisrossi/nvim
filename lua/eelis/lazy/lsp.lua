@@ -12,6 +12,15 @@ return {
         local util = require "lspconfig/util"
         local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+        local lspconfig = require('lspconfig')
+        lspconfig.zls.setup {
+            settings = {
+                zls = {
+                    semantic_tokens = "partial",
+                }
+            }
+        }
+
         require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({

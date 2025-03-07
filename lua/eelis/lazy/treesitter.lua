@@ -9,7 +9,7 @@ return {
     config = function()
         require("nvim-treesitter.configs").setup {
 
-            ensure_installed = { "lua", "markdown", "markdown_inline", "go", "rust", "c" , "odin"},
+            ensure_installed = { "lua", "markdown", "markdown_inline", "go", "rust", "c", "odin", "zig", "terraform" },
             ignore_install = { "" },
             highlight = {
                 enable = true,
