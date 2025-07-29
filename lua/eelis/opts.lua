@@ -58,7 +58,8 @@ opt.undolevels = 10000
 opt.updatetime = 200
 opt.virtualedit = "block"          -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.winminwidth = 5                -- Minimum window width
+opt.winminwidth = 4                -- Minimum window width
+opt.winborder = "rounded"
 
 if vim.fn.has("nvim-0.10") == 1 then
     opt.smoothscroll = true
@@ -77,4 +78,3 @@ vim.g.netrw_keepdir = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 0
 vim.g.netrw_winsize = 30
-

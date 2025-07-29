@@ -42,4 +42,6 @@ map("v", ">", ">gv")
 
 map("n", "<leader>pd", ":ObsidianDailies<cr>", { desc = "Show Daily Notes"})
 
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format file "})
+map("n", "<leader>f", vim.lsp.buf.format, { desc = "Format file "})
+
+map("t", "<C-space>", "<C-\\><C-n>")
