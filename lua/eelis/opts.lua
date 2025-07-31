@@ -61,6 +61,12 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 4                -- Minimum window width
 opt.winborder = "rounded"
 
+-- tj stuff
+opt.inccommand = "split"
+opt.formatoptions:remove "o"
+opt.more = false
+opt.foldmethod = "manual"
+
 if vim.fn.has("nvim-0.10") == 1 then
     opt.smoothscroll = true
 end
