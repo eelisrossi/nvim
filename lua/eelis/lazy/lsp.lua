@@ -123,6 +123,12 @@ return {
                     lspconfig.htmx.setup {
                         filetypes = { "html" }
                     }
+                end,
+                ["qmlls"] = function()
+                    local lspconfig = require('lspconfig')
+                    lspconfig.qmlls.setup {
+                        cmd = {"qmlls", "-E"}
+                    }
                 end
             }
         })
