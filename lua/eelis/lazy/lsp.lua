@@ -1,12 +1,12 @@
 local root_files = {
-  '.luarc.json',
-  '.luarc.jsonc',
-  '.luacheckrc',
-  '.stylua.toml',
-  'stylua.toml',
-  'selene.toml',
-  'selene.yml',
-  '.git',
+    '.luarc.json',
+    '.luarc.jsonc',
+    '.luacheckrc',
+    '.stylua.toml',
+    'stylua.toml',
+    'selene.toml',
+    'selene.yml',
+    '.git',
 }
 
 return {
@@ -126,14 +126,45 @@ return {
                 end,
                 ["qmlls"] = function()
                     local lspconfig = require('lspconfig')
+                    local util = lspconfig.util
+
+                    -- Arch default for Qt6 QML modules:
+                    local qt_qml = "/usr/lib/qt6/qml"
+
+                    -- Build up import paths; add project/build and Quickshell QML dirs if present
+                    local paths = { qt_qml }
+                    local cwd = vim.fn.getcwd()
+                    local function add_if_dir(p)
+                        if p and vim.fn.isdirectory(p) == 1 then table.insert(paths, p) end
+                    end
+
+                    -- Common local dirs (optional)
+                    add_if_dir(cwd .. "/qml")
+                    add_if_dir(cwd .. "/src/qml")
+                    add_if_dir(cwd .. "/build/qml")
+                    add_if_dir(cwd .. "/build/debug/qml")
+                    add_if_dir(cwd .. "/build/release/qml")
+
+                    -- Quickshell (adjust if your package installs elsewhere)
+                    add_if_dir("/usr/share/quickshell/qml")
+                    add_if_dir("/usr/lib/quickshell/qml")
+
                     lspconfig.qmlls.setup {
-                        cmd = {"qmlls", "-E"}
+                        capabilities = capabilities,
+                        cmd = { "qmlls" }, -- provided by qt6-declarative
+                        filetypes = { "qml", "qmljs" },
+                        root_dir = util.root_pattern(".qmlls.ini", "CMakeLists.txt", ".git") or util.path.dirname,
+                        cmd_env = {
+                            QML_IMPORT_PATH = table.concat(paths, ":"),
+                            -- If you ever work with Qt 5 projects:
+                            -- QML2_IMPORT_PATH = "/usr/lib/qt5/qml",
+                        },
                     }
                 end
             }
         })
 
-        local cmp_select = { behavior = cmp.SelectBehavior.Select}
+        local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
             snippet = {
