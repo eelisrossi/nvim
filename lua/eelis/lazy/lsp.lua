@@ -131,33 +131,33 @@ return {
                     -- Arch default for Qt6 QML modules:
                     local qt_qml = "/usr/lib/qt6/qml"
 
-                    -- Build up import paths; add project/build and Quickshell QML dirs if present
                     local paths = { qt_qml }
                     local cwd = vim.fn.getcwd()
                     local function add_if_dir(p)
                         if p and vim.fn.isdirectory(p) == 1 then table.insert(paths, p) end
                     end
-
-                    -- Common local dirs (optional)
+                    -- Optional local/project dirs
                     add_if_dir(cwd .. "/qml")
                     add_if_dir(cwd .. "/src/qml")
                     add_if_dir(cwd .. "/build/qml")
                     add_if_dir(cwd .. "/build/debug/qml")
                     add_if_dir(cwd .. "/build/release/qml")
-
                     -- Quickshell (adjust if your package installs elsewhere)
                     add_if_dir("/usr/share/quickshell/qml")
                     add_if_dir("/usr/lib/quickshell/qml")
 
                     lspconfig.qmlls.setup {
-                        capabilities = capabilities,
-                        cmd = { "qmlls" }, -- provided by qt6-declarative
+                        cmd = { "qmlls" }, -- from qt6-declarative
+                        capabilities = require("cmp_nvim_lsp").default_capabilities(),
                         filetypes = { "qml", "qmljs" },
                         root_dir = util.root_pattern(".qmlls.ini", "CMakeLists.txt", ".git") or util.path.dirname,
                         cmd_env = {
                             QML_IMPORT_PATH = table.concat(paths, ":"),
-                            -- If you ever work with Qt 5 projects:
-                            -- QML2_IMPORT_PATH = "/usr/lib/qt5/qml",
+
+                            -- Silence the informational logs from qmlls:
+                            QT_LOGGING_RULES = "qt.languageserver.*=false",
+                            -- If you want to be more conservative (only silence debug):
+                            -- QT_LOGGING_RULES = "qt.languageserver.debug=false"
                         },
                     }
                 end
