@@ -43,3 +43,8 @@ map("v", ">", ">gv")
 map("n", "<leader>pd", ":ObsidianDailies<cr>", { desc = "Show Daily Notes" })
 
 map("n", "<leader>f", vim.lsp.buf.format, { desc = "Format file " })
+map("n", "gK", function()
+    local new_config = not vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = 'Toggle diagnostic virtual_lines' }
+)
